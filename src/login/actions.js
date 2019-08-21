@@ -11,8 +11,8 @@ export const loginUser = (username,password) => {
       .then(({ data: { user } }) => {
         dispatch({type: LOGIN_USER_SUCCESS, user})
       })
-      .catch(() => {
-        dispatch({ type: LOGIN_USER_ERROR })
+      .catch(({ response: { data: {error} }}) => {
+        dispatch({ type: LOGIN_USER_ERROR, payload: error })
       })
   }
 }
