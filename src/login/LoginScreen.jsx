@@ -20,14 +20,14 @@ const LoginScreen = ({ loading, dispatch }) => {
     </FormControl>
     <FormControl>
       <InputLabel>Password</InputLabel>
-      <Input value={password} onChange={(event) => setPassword(event.target.value)} />
+      <Input type='password' value={password} onChange={(event) => setPassword(event.target.value)} />
     </FormControl>
-    <Button onClick={() => dispatch(loginUser())}style={{ marginTop: '15px'}} variant='contained'> Login </Button>
+    <Button onClick={() => dispatch(loginUser(username,password))}style={{ marginTop: '15px'}} variant='contained'> Login </Button>
   </div>
 }
 
 const mapStateToProps = (state) => ({
-  loading: state.loginReducer
+  loading: state.loginReducer.loading
 })
 
 export default connect(mapStateToProps)(LoginScreen)
