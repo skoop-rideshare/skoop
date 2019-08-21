@@ -1,28 +1,33 @@
 import React, { useState } from 'react'
-import FilledInput from '@material-ui/core/FilledInput'
 import FormControl from '@material-ui/core/FormControl'
-import FormHelperText from '@material-ui/core/FormHelperText'
 import Input from '@material-ui/core/Input'
 import InputLabel from '@material-ui/core/InputLabel'
 import Button from '@material-ui/core/Button'
+import { connect } from 'react-redux'
+import { loginUser } from './actions.js'
+import CircularProgress from '@material-ui/core/CircularProgress';
 
-const LoginScreen = () => {
+const LoginScreen = ({ loading, dispatch }) => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
-  const useHandler = (handler) => (event) => handler(event.target.value)
+  if (loading) return <CircularProgress/>
   return <div style={{ display: 'flex', flexDirection: 'column', color: '#3C3B5F'}}>
     <h1> Welcome to Skoop! </h1>
     <p> This page is under construction </p>
     <FormControl>
-    <InputLabel>Name</InputLabel>
-    <Input value={username} onChange={useHandler(setUsername)} />
+    <InputLabel>Username</InputLabel>
+    <Input value={username} onChange={(event) => setUsername(event.target.value)} />
     </FormControl>
     <FormControl>
       <InputLabel>Password</InputLabel>
-      <Input value={password} onChange={useHandler(setPassword)} />
+      <Input value={password} onChange={(event) => setPassword(event.target.value)} />
     </FormControl>
-    <Button style={{ marginTop: '15px'}} variant='contained'> Login </Button>
+    <Button onClick={() => dispatch(loginUser())}style={{ marginTop: '15px'}} variant='contained'> Login </Button>
   </div>
 }
 
-export default LoginScreen
+const mapStateToProps = (state) => ({
+  loading: state.loginReducer
+})
+
+export default connect(mapStateToProps)(LoginScreen)
