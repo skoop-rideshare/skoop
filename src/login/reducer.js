@@ -25,7 +25,7 @@ const error = (state=null, action) => {
   }
 }
 
-const user = (state = {}, action) => {
+const user = (state = null, action) => {
   switch(action.type) {
   case actions.LOGIN_USER_SUCCESS:
       return action.payload

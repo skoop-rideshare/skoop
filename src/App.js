@@ -1,6 +1,6 @@
 import React from 'react';
 import logo from './logo.svg';
-import LoginScreen from './login/LoginScreen.jsx'
+import HomeScreen from './home/HomeScreen.jsx'
 import './App.css';
 
 function App() {
@@ -8,7 +8,7 @@ function App() {
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <LoginScreen />
+        <HomeScreen />
       </header>
     </div>
   );
