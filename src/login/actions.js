@@ -9,9 +9,9 @@ export const loginUser = (username,password) => {
     console.log('hej')
     handleLoginUser(username, password)
       .then(({ data: { user } }) => {
-        dispatch({type: LOGIN_USER_SUCCESS, user})
+        dispatch({type: LOGIN_USER_SUCCESS, payload: user})
       })
-      .catch(({ response: { data: {error} }}) => {
+      .catch((error) => {
         dispatch({ type: LOGIN_USER_ERROR, payload: error })
       })
   }
