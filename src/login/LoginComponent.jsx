@@ -14,8 +14,16 @@ const styles = {
     display: 'flex',
     justifyContent: 'center',
     padding: '30px'
+  },
+  clickableText: {
+    margin: '0px',
+    color: '#05386B',
+    fontSize: '25px',
+    cursor: 'pointer',
+    '&:hover': {
+      color: '#EDF5E1',
+    }
   }
-
 }
 
 const LoginModal = ({ loading, loginError, dispatch, open, onClose }) => {
@@ -44,11 +52,15 @@ const LoginModal = ({ loading, loginError, dispatch, open, onClose }) => {
   </Dialog>
 }
 
-const LoginScreen = ({ loading, user, loginError, dispatch }) => {
+const LoginComponent = ({ loading, user, loginError, dispatch }) => {
   const [open, setIsOpen] = useState(false)
   console.log('user', user)
   return <div>
-      <Button variant='contained' onClick={() => setIsOpen(true)}> Login </Button>
+  {!user ? (
+    <p style={styles.clickableText} onClick={() => setIsOpen(true)}> Log In </p>
+  ) : (
+    <p style={styles.clickableText}> Log Out </p>
+  )}
       <LoginModal loading={loading} loginError={loginError} dispatch={dispatch} open={open && !user} onClose={() => setIsOpen(false)} />
     </div>
 }
@@ -59,4 +71,4 @@ const mapStateToProps = (state) => ({
   user: state.loginReducer.user
 })
 
-export default connect(mapStateToProps)(LoginScreen)
+export default connect(mapStateToProps)(LoginComponent)

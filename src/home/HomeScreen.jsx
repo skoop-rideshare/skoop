@@ -1,15 +1,11 @@
 import React from 'react'
-import LoginScreen from '../login/LoginScreen.jsx'
 import { connect } from 'react-redux'
+import Header from './Header.jsx'
 
 const HomeScreen = ({ user }) => {
   console.log('user: ', user)
   return <div>
-  {!user ? (
-    <LoginScreen />
-  ) : (
-    <div> {`Logged in as ${user.email}`}</div>
-  )}
+   <Header />
   </div>
 }
 
