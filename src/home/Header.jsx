@@ -1,24 +1,26 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import logo from '../logo.svg'
 import LoginComponent from '../login/LoginComponent.jsx'
+import { changeMenuChoice } from './actions'
+
 const styles = {
   headerStyles: {
-    position: 'absolute',
     display: 'flex',
     justifyContent: 'space-Between',
     top: '0px',
     left: '0px',
     width: '100%',
     padding: '15px',
-    boxSizing: 'border-box'
+    boxSizing: 'border-box',
+    border: '1px solid black'
   },
   logoStyle: {
     height: '70px'
   },
   clickableText: {
     margin: '0px 15px',
-    color: '#05386B',
+    font: 'sans-serif',
     fontSize: '25px',
     cursor: 'pointer',
     '&:hover': {
@@ -27,25 +29,27 @@ const styles = {
   }
 }
 
-const Options = ({options}) => {
-  console.log('options', options)
-  return <div style={{ display: 'flex'}} >
+const Options = ({dispatch, options, currentChoice}) => {
+  console.log({currentChoice})
+  return <div style={{display: 'flex', alignItems: 'center'}} >
   {options.map((item, index) => (
-      <p style={styles.clickableText} key={index}> {item} </p>
+      <p style={{...styles.clickableText, color: item == currentChoice ? 'green' : '#05386B' }} onClick={() => dispatch(changeMenuChoice(item))} key={index}> {item} </p>
     ))}
   </div>
 }
 
-const Header = (props) => {
+const Header = ({user, dispatch, currentChoice}) => {
+  const options = user === null ? ['FAQ'] : ['Requests', 'Matches', 'FAQ']
   return <div style={styles.headerStyles}>
     <img src={logo} style={styles.logoStyle} />
-    <Options options={['Requests', 'Matches', 'FAQ']}/>
+    <Options dispatch={dispatch} options={options} currentChoice={currentChoice}/>
     <LoginComponent/>
   </div>
 }
 
 const mapStateToProps = (state) => ({
-  user: state.loginReducer.user
+  user: state.loginReducer.user,
+  currentChoice: state.homeReducer.currentMenuChoice
 })
 
 export default connect(mapStateToProps)(Header)

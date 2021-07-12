@@ -8,7 +8,7 @@
   background-image: linear-gradient(to bottom ,#5CDB95, #8EE4AF);
   font-size: calc(10px + 2vmin);
   color: white;
-  font-family: 'Catamaran';
+  font-family: 'monospace';
 }
 
 .App-link {

@@ -4,7 +4,7 @@ import Input from '@material-ui/core/Input'
 import InputLabel from '@material-ui/core/InputLabel'
 import Button from '@material-ui/core/Button'
 import { connect } from 'react-redux'
-import { loginUser } from './actions.js'
+import { loginUser, createAndLoginUser } from './actions.js'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import DialogTitle from '@material-ui/core/DialogTitle'
 import Dialog from '@material-ui/core/Dialog'
@@ -47,6 +47,7 @@ const LoginModal = ({ loading, loginError, dispatch, open, onClose }) => {
     </FormControl>
     {loginError && <p>{loginError}</p>}
     <Button onClick={() => dispatch(loginUser(username,password))} style={{ marginTop: '15px'}} variant='contained'> Login </Button>
+    <Button onClick={() => dispatch(createAndLoginUser(username,password))} style={{ marginTop: '15px'}} variant='contained'> Sign up </Button>
     </div>
    )}
   </Dialog>
