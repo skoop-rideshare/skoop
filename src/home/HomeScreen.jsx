@@ -6,12 +6,14 @@ import MatchComponent from './MatchComponent.jsx'
 import RequestComponent from './RequestComponent.jsx'
 
 const HomeScreen = ({ user, currentMenuChoice }) => {
-  return <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
-   <Header />
-   {currentMenuChoice == 'Requests' && <RequestComponent />}
-   {currentMenuChoice == 'Matches' && <MatchComponent />}
-   {currentMenuChoice == 'FAQ' && <FAQComponent />}
-  </div>
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+      <Header />
+      {currentMenuChoice === 'TRIPS' && <RequestComponent />}
+      {currentMenuChoice === 'MATCHES' && <MatchComponent />}
+      {currentMenuChoice === 'INFO' && <FAQComponent />}
+    </div>
+  )
 }
 
 const mapStateToProps = (state) => ({

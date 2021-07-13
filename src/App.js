@@ -1,14 +1,14 @@
-import React from 'react';
-import logo from './logo.svg';
+import React from 'react'
+import logo from './logo.svg'
 import HomeScreen from './home/HomeScreen.jsx'
-import './App.css';
+import './App.css'
 
-function App() {
+function App () {
   return (
-    <div className="App">
-        <HomeScreen />
+    <div className='App'>
+      <HomeScreen />
     </div>
-  );
+  )
 }
 
-export default App;
+export default App

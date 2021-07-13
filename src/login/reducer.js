@@ -2,7 +2,7 @@ import * as actions from './actions'
 import { combineReducers } from 'redux'
 
 const loading = (state = false, action) => {
-  switch(action.type) {
+  switch (action.type) {
     case actions.LOGIN_USER_LOADING:
       return true
     case actions.LOGIN_USER_SUCCESS:
@@ -12,8 +12,8 @@ const loading = (state = false, action) => {
   }
 }
 
-const error = (state=null, action) => {
-  switch(action.type) {
+const error = (state = null, action) => {
+  switch (action.type) {
     case actions.LOGIN_USER_ERROR:
       return action.payload
     case actions.LOGIN_USER_LOADING:
@@ -26,8 +26,10 @@ const error = (state=null, action) => {
 }
 
 const user = (state = null, action) => {
-  switch(action.type) {
-  case actions.LOGIN_USER_SUCCESS:
+  switch (action.type) {
+    case actions.LOGOUT_USER:
+      return null
+    case actions.LOGIN_USER_SUCCESS:
       return action.payload
     default:
       return state
