@@ -1,5 +1,5 @@
 import { Input, FormControl, InputLabel, Button, Checkbox, FormControlLabel } from '@material-ui/core'
-import React, {useState, useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import { getRideRequests } from './actions.js'
 
@@ -13,16 +13,16 @@ const styles = {
   }
 }
 
-const Request = ({request: {fromAddress, toAddress, driver}}) => {
+const Request = ({ request: { fromAddress, toAddress, driver } }) => {
   return (
     <div style={styles.requestStyle}>
       <p> Start: {fromAddress}</p>
       <p> Destination: {toAddress}</p>
     </div>
   )
-} 
+}
 
-const RequestComponent = ({dispatch, user, rideRequests}) => {
+const RequestComponent = ({ dispatch, user, rideRequests }) => {
   useEffect(() => {
     dispatch(getRideRequests(user.token))
   }, [])
@@ -39,11 +39,11 @@ const RequestComponent = ({dispatch, user, rideRequests}) => {
         </h1>
         <FormControl>
           <InputLabel> Start </InputLabel>
-          <Input value={fromAddress} onChange={(event) => setFromAddress(event.target.value)}/>
+          <Input value={fromAddress} onChange={(event) => setFromAddress(event.target.value)} />
         </FormControl>
         <FormControl>
           <InputLabel> Destination </InputLabel>
-          <Input value={toAddress} onChange={(event) => setToAddress(event.target.value)}/>
+          <Input value={toAddress} onChange={(event) => setToAddress(event.target.value)} />
         </FormControl>
         <FormControl>
           <FormControlLabel

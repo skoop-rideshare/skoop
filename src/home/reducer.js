@@ -11,7 +11,7 @@ const currentMenuChoice = (state = null, action) => {
 }
 
 const rideRequests = (state = [], action) => {
-  switch(action.type) {
+  switch (action.type) {
     case actions.GET_RIDE_REQUESTS_SUCCESS:
       return action.payload
     case actions.GET_RIDE_REQUESTS_ERROR:
