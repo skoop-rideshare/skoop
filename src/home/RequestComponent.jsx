@@ -1,23 +1,39 @@
-import { Input, FormControl, InputLabel, Button, Checkbox, FormControlLabel } from '@material-ui/core'
+import { Input, FormControl, InputLabel, Button, Checkbox, FormControlLabel, Icon } from '@material-ui/core'
 import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
-import { getRideRequests } from './actions.js'
+import { getRideRequests, createRideRequest, deleteRideRequest } from './actions.js'
+import deleteLogo from '../delete_forever.svg'
+// import DeleteOutlined from '@material-ui/icons/DeleteOutlined'
 
 const styles = {
   requestStyle: {
-    padding: '15px',
+    padding: '30px',
     borderRadius: '5px',
     border: '1px solid lightgaey',
     marginBottom: '15px',
-    boxShadow: '1px 1px 1px 1px lightgrey'
+    boxShadow: '0px 0px 15px 0px lightgray',
+    backgroundColor: 'white',
+    position: 'relative'
+  },
+  deleteStyle: {
+    position: 'absolute',
+    top: '15px',
+    right: '15px',
+    cursor: 'pointer'
+  },
+  textStyle: {
+    margin: '0px 0px 15px 0px'
   }
 }
 
-const Request = ({ request: { fromAddress, toAddress, driver } }) => {
+const Request = ({ dispatch, request: { fromAddress, toAddress, driver, _id }, token }) => {
+  console.log({_id})
   return (
     <div style={styles.requestStyle}>
-      <p> Start: {fromAddress}</p>
-      <p> Destination: {toAddress}</p>
+      <img onClick={() => dispatch(deleteRideRequest(token, _id))} src={deleteLogo} style={styles.deleteStyle}/>
+      <p style={styles.textStyle}> Start: {fromAddress}</p>
+      <p style={styles.textStyle}> Destination: {toAddress}</p>
+      <p style={styles.textStyle}> Driver: {driver ? 'yes' : 'no'}</p>
     </div>
   )
 }
@@ -33,8 +49,8 @@ const RequestComponent = ({ dispatch, user, rideRequests }) => {
 
   return (
     <div style={{ flex: 1 }}>
-      <div style={{ display: 'flex', flexDirection: 'column', backgroundColor: 'white', borderRadius: '5px', padding: '45px' }}>
-        <h1 style={{ color: 'black', padding: '15px 30px' }}>
+      <div style={{ display: 'flex', flexDirection: 'column', backgroundColor: 'white', borderRadius: '5px', padding: '45px', boxShadow: '0px 0px 15px 0px lightgray'}}>
+        <h1 style={{ color: 'black', padding: '15px 30px'}}>
           What's your destination?
         </h1>
         <FormControl>
@@ -58,13 +74,13 @@ const RequestComponent = ({ dispatch, user, rideRequests }) => {
             label='Driver'
           />
         </FormControl>
-        <Button onClick={() => dispatch(getRideRequests(user.token))} variant='contained'> Submit </Button>
+        <Button onClick={() => dispatch(createRideRequest(user.token, {driver, fromAddress, toAddress}))} variant='contained'> Submit </Button>
       </div>
       <h2>
         Pending ride requests
       </h2>
       {rideRequests.map((item, index) => (
-        <Request key={index} request={item} />
+        <Request dispatch={dispatch} key={index} request={item} token={user.token}/>
       ))}
 
     </div>

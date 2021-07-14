@@ -15,10 +15,11 @@ const styles = {
     padding: '15px',
     boxSizing: 'border-box',
     boxShadow: '1px 1px 1px 1px lightgrey',
-    marginBottom: '30px'
+    marginBottom: '30px',
+    backgroundColor: 'white'
   },
   logoStyle: {
-    height: '70px',
+    height: '60px',
     color: 'black'
   },
   clickableText: {

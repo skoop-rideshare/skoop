@@ -20,4 +20,6 @@ export const handleSignUpUser = (username, password) => axios.post(`${BASE_URL}/
 
 export const handleGetRequests = (token) => axios.get(`${BASE_URL}/api/rides`, authHeaders(token))
 
-export const handleCreateRequest = (token, rideRequest) => axios.get(`${BASE_URL}/api/rides`, { rideRequest, ...authHeaders(token) })
+export const handleCreateRequest = (token, rideRequest) => axios.post(`${BASE_URL}/api/rides/create`, { rideRequest }, authHeaders(token))
+
+export const handleDeleteRequest = (token, rideRequestID) => axios.post(`${BASE_URL}/api/rides/delete`, { rideRequestID }, authHeaders(token))
