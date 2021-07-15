@@ -48,11 +48,13 @@ const RequestComponent = ({ dispatch, user, rideRequests }) => {
   const [driver, setDriver] = useState(false)
 
   return (
-    <div style={{ flex: 1 }}>
+    <div style={{ width: '65%', textAlign: 'center'}}>
+      <h1> skoop or get skooped up </h1>
+      <p> Add your commute here, and we will try to find a perfect match for you! </p>
       <div style={{ display: 'flex', flexDirection: 'column', backgroundColor: 'white', borderRadius: '5px', padding: '45px', boxShadow: '0px 0px 15px 0px lightgray'}}>
-        <h1 style={{ color: 'black', padding: '15px 30px'}}>
-          skoop or get skooped up
-        </h1>
+        <h3 style={{ color: 'black', padding: '15px 30px'}}>
+          What's your commute?
+        </h3>
         <FormControl>
           <InputLabel> Start </InputLabel>
           <Input value={fromAddress} onChange={(event) => setFromAddress(event.target.value)} />
@@ -76,9 +78,13 @@ const RequestComponent = ({ dispatch, user, rideRequests }) => {
         </FormControl>
         <Button onClick={() => dispatch(createRideRequest(user.token, {driver, fromAddress, toAddress}))} variant='contained'> Submit </Button>
       </div>
-      {rideRequests.length !== 0 && (<h2>
-        Pending ride requests
-      </h2>)}
+      {rideRequests.length !== 0 && (
+        <div>
+        <h2>
+        Pending commutes 
+      </h2>
+      <p> Our algotihms are working hard to find you a commuting buddy for these commutes. </p>
+      </div>)}
       {rideRequests.map((item, index) => (
         <Request dispatch={dispatch} key={index} request={item} token={user.token}/>
       ))}
