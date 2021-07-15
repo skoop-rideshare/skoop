@@ -1,10 +1,10 @@
-import { Input, FormControl, InputLabel, Button, Checkbox, FormControlLabel, Icon, TextField } from '@material-ui/core'
+import { Input, FormControl, InputLabel, Button, Checkbox, FormControlLabel, createMuiTheme } from '@material-ui/core'
 import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import { getRideRequests, createRideRequest, deleteRideRequest } from './actions.js'
 import deleteLogo from '../delete_forever.svg'
-import { MuiPickersUtilsProvider } from '@material-ui/pickers'
-import LuxonUtils from '@date-io/luxon';
+import { MuiPickersUtilsProvider, KeyboardTimePicker } from '@material-ui/pickers'
+import LuxonUtils from '@date-io/luxon'
 
 const styles = {
   requestStyle: {
@@ -24,6 +24,10 @@ const styles = {
   },
   textStyle: {
     margin: '0px 0px 15px 0px'
+  },
+  clockStyle: {
+    backroundColor: '#00CC66',
+    color: '#00CC66'
   }
 }
 
@@ -56,7 +60,7 @@ const RequestComponent = ({ dispatch, user, rideRequests }) => {
     'Saturday': false,
     'Sunday': false,
   })
-  const [date, setDate] = useState(new Date('2014-08-18T21:11:54'))
+  const [date, setDate] = useState(new Date('2014-08-18T07:30:00'))
   
   return (
     <MuiPickersUtilsProvider utils={LuxonUtils}>
@@ -75,16 +79,15 @@ const RequestComponent = ({ dispatch, user, rideRequests }) => {
             <InputLabel> Destination </InputLabel>
             <Input value={toAddress} onChange={(event) => setToAddress(event.target.value)} />
           </FormControl>
-          <TextField
-            id="time"
+          <KeyboardTimePicker
+            margin="normal"
+            id="time-picker"
             label="I want to leave at"
-            type="time"
-            defaultValue="07:30"
-            InputLabelProps={{
-              shrink: true,
-            }}
-            inputProps={{
-              step: 300
+            value={date}
+            onChange={setDate}
+            InputProps={{ className: styles.clockStyle }}
+            KeyboardButtonProps={{
+              'aria-label': 'change time',
             }}
           />
           <FormControl>
