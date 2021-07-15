@@ -20,6 +20,7 @@ const styles = {
   },
   logoStyle: {
     height: '60px',
+    marginRight: '15px',
     color: 'black'
   },
   clickableText: {
@@ -37,7 +38,7 @@ const Options = ({ dispatch, options, currentChoice }) => {
   return (
     <div style={{ display: 'flex', alignItems: 'center' }}>
       {options.map((item, index) => (
-        <p style={{ ...styles.clickableText, color: item == currentChoice ? 'green' : 'black' }} onClick={() => dispatch(changeMenuChoice(item))} key={index}> {item} </p>
+        <p style={{ ...styles.clickableText, color: item == currentChoice ? '#00CC66' : 'black' }} onClick={() => dispatch(changeMenuChoice(item))} key={index}> {item} </p>
       ))}
     </div>
   )
@@ -47,7 +48,10 @@ const Header = ({ user, dispatch, currentChoice }) => {
   const options = user === null ? ['INFO'] : ['TRIPS', 'MATCHES', 'INFO']
   return (
     <div style={styles.headerStyles}>
-      <img src={logo} style={styles.logoStyle} />
+      <div style={{display: 'flex', margin: '0px', alignItems: 'center'}}>
+        <img src={logo} style={styles.logoStyle} />
+        <h4> skoop </h4>
+      </div>
       <Options dispatch={dispatch} options={options} currentChoice={currentChoice} />
       <LoginComponent />
     </div>

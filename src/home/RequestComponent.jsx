@@ -51,7 +51,7 @@ const RequestComponent = ({ dispatch, user, rideRequests }) => {
     <div style={{ flex: 1 }}>
       <div style={{ display: 'flex', flexDirection: 'column', backgroundColor: 'white', borderRadius: '5px', padding: '45px', boxShadow: '0px 0px 15px 0px lightgray'}}>
         <h1 style={{ color: 'black', padding: '15px 30px'}}>
-          What's your destination?
+          skoop or get skooped up
         </h1>
         <FormControl>
           <InputLabel> Start </InputLabel>
@@ -76,9 +76,9 @@ const RequestComponent = ({ dispatch, user, rideRequests }) => {
         </FormControl>
         <Button onClick={() => dispatch(createRideRequest(user.token, {driver, fromAddress, toAddress}))} variant='contained'> Submit </Button>
       </div>
-      <h2>
+      {rideRequests.length !== 0 && (<h2>
         Pending ride requests
-      </h2>
+      </h2>)}
       {rideRequests.map((item, index) => (
         <Request dispatch={dispatch} key={index} request={item} token={user.token}/>
       ))}

@@ -26,6 +26,11 @@ const styles = {
     '&:hover': {
       color: '#EDF5E1'
     }
+  },
+  headerButtonStyle: {
+    fontSize: '20px',
+    padding: '10px 15px',
+    backgroundColor: '#00CC66'
   }
 }
 
@@ -50,8 +55,8 @@ const LogInModal = ({ loading, loginError, dispatch, open, onClose }) => {
             <Input type='password' value={password} onChange={(event) => setPassword(event.target.value)} />
           </FormControl>
           {loginError && <p>{loginError}</p>}
-          <Button onClick={() => dispatch(logInUser(username, password))} style={{ marginTop: '15px' }} variant='contained'> Login </Button>
-          <Button onClick={() => dispatch(createAndLoginUser(username, password))} style={{ marginTop: '15px' }} variant='contained'> Sign up </Button>
+          <Button onClick={() => dispatch(logInUser(username, password))} variant='contained'> Login </Button>
+          <Button onClick={() => dispatch(createAndLoginUser(username, password))} variant='contained'> Sign up </Button>
         </div>
       )}
     </Dialog>
@@ -62,13 +67,11 @@ const LogInComponent = ({ loading, user, loginError, dispatch }) => {
   const [open, setIsOpen] = useState(false)
   return (
     <div>
-      <div style={{ borderRadius: '30px', backgroundColor: 'black' }}>
         {!user ? (
-          <p style={styles.clickableText} onClick={() => setIsOpen(true)}> LOG IN </p>
+          <Button style={styles.headerButtonStyle} onClick={() => setIsOpen(true)} variant="contained" color="primary"> LOG IN </Button>
         ) : (
-          <p style={styles.clickableText} onClick={() => dispatch(logOutUser())}> LOG OUT </p>
+          <Button style={styles.headerButtonStyle} onClick={() => dispatch(logOutUser())} variant="contained" color="primary"> LOG OUT </Button>
         )}
-      </div>
       <LogInModal loading={loading} loginError={loginError} dispatch={dispatch} open={open && !user} onClose={() => setIsOpen(false)} />
     </div>
   )
